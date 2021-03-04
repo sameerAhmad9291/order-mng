@@ -10,4 +10,3 @@ app.use(bodyParser.json());
 app.use('/alive', (req, res) => res.send({ alive: true }));
 
 export default app;
-
