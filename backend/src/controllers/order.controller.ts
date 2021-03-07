@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as orderService from '../services/user.service';
+import * as orderService from '../services/order.service';
 
 export const getOrders = async (req: express.Request, res: express.Response): Promise<void> => {
     const orders = await orderService.getOrders();
