@@ -9,8 +9,11 @@ export const getOrders = async (req: express.Request, res: express.Response): Pr
 
 export const getOrderById = async (req: express.Request, res: express.Response): Promise<void> => {
     const { id } = req.params;
-    const orders = await orderService.getOrderById(id);
-    res.send(orders);
+    const order = await orderService.getOrderById(id);
+    if (!order) {
+        res.status(HTTP_CODES.INVALID_REQUEST).send('Unable to find order');
+    }
+    res.send(order);
 }
 
 
