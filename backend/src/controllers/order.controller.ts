@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as orderService from '../services/order.service';
+import { HTTP_CODES } from '../utils';
 
 export const getOrders = async (req: express.Request, res: express.Response): Promise<void> => {
     const orders = await orderService.getOrders();

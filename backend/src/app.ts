@@ -9,6 +9,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/alive', (req, res) => res.send({ alive: true }));
-app.use('/orders', orderRouters);
+app.use('/api/orders', orderRouters);
 
 export default app;
