@@ -3,8 +3,8 @@ import * as orderController from '../controllers/order.controller';
 
 const router = express.Router();
 
-router.get('/get-all', orderController.getOrders);
-router.get('/get-by-id/:id', orderController.getOrderById);
+router.get('/', orderController.getOrders);
+router.get('/:id', orderController.getOrderById);
 router.put('/update/:id', orderController.updateOrder);
 
 export default router;

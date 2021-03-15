@@ -1,4 +1,4 @@
-const enum HTTP_CODES {
+export const enum HTTP_CODES {
     INVALID_REQUEST = 400,
     INTERNAL_SERVER_ERROR = 500
 }
