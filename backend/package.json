@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node --inspect=5080 -r ts-node/register ./src/server.ts",
     "start:watch": "nodemon",
-    "build": "npm run test && tsc"
+    "build": "npm run test && tsc",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "firebase-admin": "^9.5.0",
     "ts-node-dev": "^1.1.6"
   },
   "devDependencies": {
