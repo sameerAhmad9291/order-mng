@@ -10,16 +10,16 @@ export const getOrders = async () => {
 }
 
 const getDocById = async (orderId) => {
-    return (await order.where('id', '==', orderId).get()).docs[0];
+    return (await order.where('uid', '==', orderId).get()).docs[0];
 }
 
 export const getOrderById = async (orderId): Promise<IOrder> => {
-    const order = (await getDocById(orderId)).data() as IOrder;
+    const order = (await getDocById(orderId))?.data() as IOrder;
     return order
 }
 
 export const updateOrder = async (orderId: string, title: string, bookingDate: Date) => {
-    const updatedOrder = await (await getDocById(orderId)).ref.update({
+    const updatedOrder = await (await getDocById(orderId))?.ref.update({
         title,
         bookingDate,
     });
