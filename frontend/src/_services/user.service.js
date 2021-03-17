@@ -1,28 +1,43 @@
-import config from 'config';
-import { authHeader } from '../_helpers';
+import config from "config";
+import axios from "axios";
+import { authHeader } from "../_helpers";
+import firebase from "firebase/app";
 
 export const userService = {
-    login,
-    logout,
+  login,
+  logout,
+  getById,
 };
 
-function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    };
-
-    return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
-        .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
-
-            return user;
-        });
+function login(email, password) {
+  return firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = {
+        uid: userCredential.user.uid,
+        token: userCredential.user.za,
+      };
+      localStorage.setItem("user", JSON.stringify(user));
+      return user;
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+    });
 }
 
 function logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
+  // remove user from local storage to log user out
+  localStorage.removeItem("user");
+}
+
+function getById(id) {
+  return axios
+    .get(`${config.apiUrl}/users/${id}`, {
+      headers: {
+        ...authHeader,
+      },
+    })
+    .then((res) => res.data);
 }

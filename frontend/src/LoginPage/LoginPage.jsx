@@ -12,10 +12,10 @@ function LoginPage() {
     const [submitted, setSubmitted] = useState(false);
     const { username, password } = inputs;
     const loggingIn = useSelector(state => state.authentication.loggingIn);
+    const user = useSelector(state => state.authentication.user);
     const dispatch = useDispatch();
     const location = useLocation();
 
-    // reset login status
     useEffect(() => { 
         dispatch(userActions.logout()); 
     }, []);
@@ -31,7 +31,7 @@ function LoginPage() {
         setSubmitted(true);
         if (username && password) {
             // get return url from location state or default to home page
-            const { from } = location.state || { from: { pathname: "/" } };
+            const { from } = location.state || { from: { pathname: "/orders" } };
             dispatch(userActions.login(username, password, from));
         }
     }
@@ -59,7 +59,7 @@ function LoginPage() {
                         {loggingIn && <span className="spinner-border spinner-border-sm mr-1"></span>}
                         Login
                     </button>
-                    <Link to="/orders" className="btn btn-link">Register</Link>
+                    <Link to="/orders" className="btn btn-link">Orders</Link>
                 </div>
             </form>
         </div>

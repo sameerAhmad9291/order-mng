@@ -2,12 +2,19 @@ import React, { useEffect } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/firestore';
+import FIREBASE_CONFIG from '../firebaseConfig.js';
+firebase.initializeApp(FIREBASE_CONFIG);
+
 import { history } from '../_helpers';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
 import { OrderListPage } from '../OrderListPage';
 import { LoginPage } from '../LoginPage';
-import { OrderPage } from '../OrderPage';
+import { OrderDetailPage } from '../OrderDetailPage';
 
 function App() {
     const alert = useSelector(state => state.alert);
@@ -15,13 +22,12 @@ function App() {
 
     useEffect(() => {
         history.listen((location, action) => {
-            // clear alert on location change
             dispatch(alertActions.clear());
         });
     }, []);
 
     return (
-        <div className="jumbotron">
+        <div className="jumbotron" style={{backgroundColor: "white"}}>
             <div className="container">
                 <div className="col-md-8 offset-md-2">
                     {alert.message &&
@@ -29,10 +35,10 @@ function App() {
                     }
                     <Router history={history}>
                         <Switch>
-                            <Route path="/login" component={LoginPage} />
-                            <Route exact path="/orders" component={OrderListPage} />
-                            <Route exact path="/orders/:id" component={OrderPage} />
-                            <Redirect from="*" to="/login" />
+                            <Route exact path="/" component={LoginPage} />
+                            <PrivateRoute path="/orders/:id" component={OrderDetailPage} />
+                            <PrivateRoute path="/orders" component={OrderListPage} />
+                            <Redirect from="*" to="/" />
                         </Switch>
                     </Router>
                 </div>
