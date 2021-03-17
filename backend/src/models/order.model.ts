@@ -19,7 +19,7 @@ export const getOrderById = async (orderId): Promise<IOrder> => {
 }
 
 export const updateOrder = async (orderId: string, title: string, bookingDate: Date) => {
-    const updatedOrder = await (await getDocById(orderId))?.ref.update({
+    await (await getDocById(orderId))?.ref.update({
         title,
         bookingDate,
     });

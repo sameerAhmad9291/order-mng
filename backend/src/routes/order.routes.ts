@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/', orderController.getOrders);
 router.get('/:id', orderController.getOrderById);
-router.put('/update/:id', orderController.updateOrder);
+router.put('/:id', orderController.updateOrder);
 
 export default router;
