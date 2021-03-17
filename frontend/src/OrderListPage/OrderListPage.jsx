@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { orderActions } from "../_actions";
+import { orderActions, userActions } from "../_actions";
 
 function Customer(props) {
   const customer = props.customer;
@@ -40,8 +40,18 @@ function OrderItem(props) {
       </td>
       <td>
         {order.uid && (
-          <Link to={`/orders/${order.uid}`} className="btn btn-link">
+          <Link to={`/orders/${order.uid}`} className="btn btn-info">
             View
+          </Link>
+        )}
+      </td>
+      <td>
+        {order.uid && (
+          <Link
+            to={{ pathname: `/orders/${order.uid}`, state: { mode: "Edit" } }}
+            className="btn btn-success"
+          >
+            Edit
           </Link>
         )}
       </td>
@@ -59,19 +69,20 @@ function OrderListPage() {
 
   return (
     <div className="col-lg-12">
-      <h3>Orders:</h3>
+      <h3>Orders</h3>
       {orders.loading && <em>Loading users...</em>}
       {orders.error && (
         <span className="text-danger">ERROR: {orders.error}</span>
       )}
       {orders && (
-        <table>
-          <thead>
+        <table className="table table-bordered">
+          <thead style={{ backgroundColor: "lightgrey" }}>
             <tr>
-              <th>Title</th>
-              <th>Booking Date</th>
-              <th>Address</th>
-              <th>Customer</th>
+              <th scope="col">Title</th>
+              <th scope="col">Booking Date</th>
+              <th scope="col">Address</th>
+              <th scope="col">Customer</th>
+              <th scope="col" colSpan="2"></th>
             </tr>
           </thead>
           <tbody>

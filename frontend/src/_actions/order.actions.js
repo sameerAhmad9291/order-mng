@@ -35,7 +35,10 @@ function getById(id) {
     dispatch(request());
     orderService.getById(id).then(
       (order) => dispatch(success(order)),
-      (error) => dispatch(failure(error.toString()))
+      (error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
     );
   };
 
@@ -50,4 +53,28 @@ function getById(id) {
   }
 }
 
-function update() {}
+function update(id, order, from) {
+  return (dispatch) => {
+    dispatch(request());
+    orderService.update(id, order).then(
+      (order) => {
+        dispatch(success(order));
+        history.push(from);
+      },
+      (error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request() {
+    return { type: orderConstants.UPDATE_REQUEST };
+  }
+  function success(order) {
+    return { type: orderConstants.UPDATE_SUCCESS, order };
+  }
+  function failure(error) {
+    return { type: orderConstants.UPDATE_FAILURE, error };
+  }
+}

@@ -34,6 +34,22 @@ export function orders(state = { items: [] }, action) {
         loading: false,
         selectedOrder: null,
       };
+    case orderConstants.UPDATE_REQUEST:
+      return {
+        loading: true,
+        selectedOrder: null,
+      };
+    case orderConstants.UPDATE_SUCCESS:
+      return {
+        selectedOrder: action.order,
+        loading: false,
+      };
+    case orderConstants.UPDATE_FAILURE:
+      return {
+        error: action.error,
+        loading: false,
+        selectedOrder: null,
+      };
     default:
       return state;
   }

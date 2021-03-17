@@ -1,7 +1,6 @@
 import config from "config";
 import { authHeader } from "../_helpers";
-import axios from 'axios';
-
+import axios from "axios";
 
 export const orderService = {
   getAll,
@@ -10,19 +9,23 @@ export const orderService = {
 };
 
 function getAll() {
-  return axios.get(`${config.apiUrl}/orders`).then(res=>res.data);
+  return axios
+    .get(`${config.apiUrl}/orders`, { headers: { ...authHeader() } })
+    .then((res) => res.data);
 }
 
 function getById(id) {
-  return axios.get(`${config.apiUrl}/orders/${id}`).then(res=>res.data);
+  return axios
+    .get(`${config.apiUrl}/orders/${id}`, { headers: { ...authHeader() } })
+    .then((res) => res.data);
 }
 
-function update(orderDetail) {
+function update(orderId, orderDetail) {
   const requestOptions = {
     method: "PUT",
-    headers: { ...authHeader(), "Content-Type": "application/json" },
+    headers: { ...authHeader() },
     body: JSON.stringify(orderDetail),
   };
 
-  return fetch(`${config.apiUrl}/orders/${user.id}`, requestOptions);
+  return fetch(`${config.apiUrl}/orders/${orderId}`, requestOptions);
 }
