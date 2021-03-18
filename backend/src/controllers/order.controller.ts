@@ -21,6 +21,6 @@ export const getOrderById = async (req: express.Request, res: express.Response):
 export const updateOrder = async (req: express.Request, res: express.Response): Promise<void> => {
     const { id } = req.params;
     const { title, bookingDate } = req.body;
-    const orders = await orderService.updateOrder(id, title, bookingDate);
-    res.send(orders);
+    const updatedOrder = await orderService.updateOrder(id, title, bookingDate);
+    res.send(updatedOrder);
 }
