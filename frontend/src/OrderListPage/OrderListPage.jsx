@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { orderActions } from "../_actions";
 
-import { orderActions, userActions } from "../_actions";
-
-function Customer(props) {
-  const customer = props.customer;
+function Customer({ customer }) {
   return (
     <>
       {customer?.name} {customer?.email} {customer?.phone}
@@ -13,8 +11,7 @@ function Customer(props) {
   );
 }
 
-function Address(props) {
-  const address = props.address;
+function Address({ address }) {
   return (
     <>
       {address?.street} {address?.city} {address?.zip} {address?.country}
@@ -22,8 +19,7 @@ function Address(props) {
   );
 }
 
-function OrderItem(props) {
-  const order = props.order;
+function OrderItem({ order }) {
   return (
     <tr>
       <td>{order.title} </td>
@@ -70,27 +66,29 @@ function OrderListPage() {
   return (
     <div className="col-lg-12">
       <h3>Orders</h3>
-      {orders.loading && <em>Loading users...</em>}
-      {orders.error && (
-        <span className="text-danger">ERROR: {orders.error}</span>
-      )}
       {orders && (
-        <table className="table table-bordered">
-          <thead style={{ backgroundColor: "lightgrey" }}>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Booking Date</th>
-              <th scope="col">Address</th>
-              <th scope="col">Customer</th>
-              <th scope="col" colSpan="2"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.items.map((order, index) => (
-              <OrderItem key={index} order={order} />
-            ))}
-          </tbody>
-        </table>
+        <>
+          <table className="table table-bordered">
+            <thead style={{ backgroundColor: "lightgrey" }}>
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Booking Date</th>
+                <th scope="col">Address</th>
+                <th scope="col">Customer</th>
+                <th scope="col" colSpan="2"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.items && orders.items.map((order, index) => (
+                <OrderItem key={index} order={order} />
+              ))}
+            </tbody>
+          </table>
+          {orders.loading && <span>Loading orders...</span>}
+          {orders.error && (
+            <span className="text-danger">ERROR: {orders.error}</span>
+          )}
+        </>
       )}
     </div>
   );
