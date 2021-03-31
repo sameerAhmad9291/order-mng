@@ -70,7 +70,7 @@ Order Data Example
   },
   "bookingDate": 1554284950000,
   "customer": {
-    "email": "emad.alam@construyo.de",
+    "email": "emad.alam@google.come",
     "name": "Emad Alam",
     "phone": "015252098067"
   },
@@ -82,8 +82,8 @@ Order Data Example
 User Data Example
 ```json
 {
-  "email": "coding-challenge@construyo",
-  "name": "Construyo Coding Challenge",
+  "email": "coding-challenge",
+  "name": "Coding Challenge",
   "phone": "0123456789",
   "uid": "5iEm1HvIxubLaiKO4yj0Npmvq0F2"
 }
