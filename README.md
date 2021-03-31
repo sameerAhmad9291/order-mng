@@ -7,7 +7,7 @@
 - [available APIs](#available-apis)
 - [full scenario](#full-scenario)
 - [technical explanation](#technical-explanation)
-- [technologies(#technologies)
+- [technologies](#technologies)
 
 ## Installation
 for the services to run smothly together,
