@@ -7,7 +7,6 @@
 - [available APIs](#available-apis)
 - [full scenario](#full-scenario)
 - [technical explanation](#technical-explanation)
-- [technologies](#technologies)
 
 ## Installation
 for the services to run smothly together,
@@ -107,6 +106,3 @@ order model.
     bookingDate: Date;
     address: IAddress;
     customer: ICustomer;
-
-## Technologies
-Typescript, NodeJS, ReactJs, Fireship, Jest, ExpressJs, redux
